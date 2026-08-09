@@ -1,0 +1,32 @@
+CREATE DATABASE employee_leave_management;
+
+USE employee_leave_management;
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_name VARCHAR(100) NOT NULL,
+    department VARCHAR(50),
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15)
+);
+ select*from employees
+CREATE TABLE leave_balance (
+    balance_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_id INT NOT NULL,
+    total_leave INT DEFAULT 20,
+    used_leave INT DEFAULT 0,
+    remaining_leave INT DEFAULT 20,
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+);
+
+CREATE TABLE leave_requests (
+    leave_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_id INT NOT NULL,
+    leave_type VARCHAR(30) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    days INT NOT NULL,
+    reason VARCHAR(255),
+    status VARCHAR(20) DEFAULT 'Pending',
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+);
