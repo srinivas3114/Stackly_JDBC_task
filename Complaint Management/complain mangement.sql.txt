@@ -1,0 +1,28 @@
+CREATE DATABASE municipality_complaints;
+USE municipality_complaints;
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15),
+    email VARCHAR(100)
+);
+
+CREATE TABLE officers (
+    officer_id INT PRIMARY KEY AUTO_INCREMENT,
+    officer_name VARCHAR(100) NOT NULL,
+    department VARCHAR(50),
+    phone VARCHAR(15)
+);
+
+CREATE TABLE complaints (
+    complaint_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    officer_id INT NULL,
+    complaint_text VARCHAR(500) NOT NULL,
+    complaint_date DATE,
+    status VARCHAR(30) DEFAULT 'Pending',
+    resolution VARCHAR(500),
+    
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (officer_id) REFERENCES officers(officer_id)
+);
