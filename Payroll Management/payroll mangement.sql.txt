@@ -1,0 +1,31 @@
+CREATE DATABASE payroll_management;
+USE payroll_management;
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_name VARCHAR(50) NOT NULL,
+    department VARCHAR(50),
+    designation VARCHAR(50),
+    basic_salary DECIMAL(10,2)
+);
+
+CREATE TABLE salaries (
+    salary_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT,
+    basic_salary DECIMAL(10,2),
+    allowance DECIMAL(10,2),
+    deduction DECIMAL(10,2),
+    net_salary DECIMAL(10,2),
+    salary_month VARCHAR(20),
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
+
+CREATE TABLE payroll (
+    payroll_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT,
+    gross_salary DECIMAL(10,2),
+    tax DECIMAL(10,2),
+    net_salary DECIMAL(10,2),
+    payroll_month VARCHAR(20),
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
