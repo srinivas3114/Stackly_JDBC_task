@@ -1,0 +1,47 @@
+CREATE DATABASE hotel_management;
+USE hotel_management;
+
+CREATE TABLE rooms (
+    room_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_number VARCHAR(10) UNIQUE NOT NULL,
+    room_type VARCHAR(30) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'Available'
+);
+
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15),
+    email VARCHAR(100)
+);
+
+CREATE TABLE bookings (
+    booking_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    room_id INT,
+    check_in DATE,
+    check_out DATE,
+    total_amount DECIMAL(10,2),
+    status VARCHAR(20) DEFAULT 'Booked',
+
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id),
+
+    FOREIGN KEY (room_id)
+        REFERENCES rooms(room_id)
+);
+
+
+
+INSERT INTO rooms
+(room_number, room_type, price, status)
+VALUES
+('101', 'Single', 1500, 'Available'),
+('102', 'Single', 1500, 'Available'),
+('103', 'Double', 2500, 'Available'),
+('104', 'Double', 2500, 'Available'),
+('105', 'Deluxe', 3500, 'Available'),
+('106', 'Deluxe', 3500, 'Available'),
+('107', 'Suite', 5000, 'Available'),
+('108', 'Suite', 5000, 'Available');
